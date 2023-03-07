@@ -8,11 +8,11 @@ def build_heap(data):
     n = len(data)
 
     for i in range(n // 2, -1, -1):
-        checkin(data,n,i,swaps)
+        checkin(data, n, i, swaps)
     return swaps
 
-
-def checkin(data,n,i,swaps) :
+#corresponding checks
+def checkin(data, n, i, swaps) :
     index = i
     right = i*2 + 2
     left = i*2 + 1
@@ -23,21 +23,21 @@ def checkin(data,n,i,swaps) :
         index = left
     if i != index:
         swaps.append((i,index))
-        data[index], data[i] = data[i], data[index]
-        checkin(index,data,swaps)
+        data[i], data[index] = data[index], data[i]
+        checkin(data, n, index, swaps)
 
 
 def main():
     
-    # TODO : add input and corresponding checks
+    # TODO : add input 
     # add another input for I or F 
     imp = input() # first two tests are from keyboard, third test is from a file
 
     if "F" in imp:
-        test_file = "04"
-        path = './test/'
-        test_path = path + test_file
-        with open(test_path, "r") as f:
+        #test_file = "04"
+        path = './test/04'
+        #test_path = path + test_file
+        with open(path, "r") as f:
             n = int(f.readline().strip())
             data = list(map(int, f.readline().strip().split()))
     
