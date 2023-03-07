@@ -1,30 +1,47 @@
 # python3
 import os
 
-def build_heap(data):
+def build_heap(arr):
     # TODO: Creat heap and heap sort
     # try to achieve  O(n) and not O(n2)
     swaps = []
-    n = len(data)
+    n = len(arr)
 
     for i in range(n // 2, -1, -1):
-        checkin(data, n, i, swaps)
+       
+        #corresponding checks
+
+        index = i
+        right = i*2 + 2
+        left = i*2 + 1
+
+
+        if right < n and arr[right] < arr[index]:
+            index = right
+        if left < n and arr[left] < arr[index]:
+            index = left
+        if i != index:
+            swaps.append((i,index))
+            arr[i], arr[index] = arr[index], arr[i]
+            
+        while True:
+            i = index 
+            right = i*2 + 2
+            left = i*2 + 1
+
+            if right < n and arr[right] < arr[index]:
+                index = right
+            if left < n and arr[left] < arr[index]:
+                index = left
+            if i == index:
+                break
+
+            swaps.append((i,index))
+            arr[i], arr[index] = arr[index], arr[i]
+            
+        
     return swaps
 
-#corresponding checks
-def checkin(data, n, i, swaps) :
-    index = i
-    right = i*2 + 2
-    left = i*2 + 1
-
-    if right < n and data[right] < data[index]:
-        index = right
-    if left < n and data[left] < data[index]:
-        index = left
-    if i != index:
-        swaps.append((i,index))
-        data[i], data[index] = data[index], data[i]
-        checkin(data, n, index, swaps)
 
 
 def main():
@@ -34,26 +51,38 @@ def main():
     imp = input() # first two tests are from keyboard, third test is from a file
 
     if "F" in imp:
-        path = './tests/04'
-        with open(path, "r") as f:
-            n = int(f.readline().strip())
-            data = list(map(int, f.readline().strip().split()))
+        path = './tests/'
+        file = input()
+        file_path = path + file
+        if "a" not in file:
+            try:
+                with open(file_path) as fl:
+                    n = int(fl.readline())
+                    arr = list(map(int, fl.readline().strip().split()))
+            except FileNotFoundError:
+                print("Error: file not found ")
+                return
+
+        else:
+            print("Error")
+        
+        
     
 
     if "I" in imp:
     # input from keyboard
         n = int(input())
-        data = list(map(int, input().split()))
+        arr = list(map(int, input().split()))
     
     # checks if lenght of data is the same as the said lenght
-    assert len(data) == n
+    assert len(arr) == n
     # calls function to assess the data 
     # and give back all swaps
-    swaps = build_heap(data)
+    swaps = build_heap(arr)
 
     # TODO: output how many swaps were made, 
     # this number should be less than 4n (less than 4*len(data))
-    assert len(swaps) <= 4*n
+    assert len(swaps) <= n*4
 
     # output all swaps
     print(len(swaps))
