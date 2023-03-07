@@ -56,9 +56,9 @@ def main():
         file_path = path + file
         if "a" not in file:
             try:
-                with open(file_path, "r") as fl:
+                with open(file_path) as fl:
                     n = int(fl.readline())
-                    arr = list(map(int, fl.readline().strip().split()))
+                    arr = list(map(int, fl.readline().split()))
             except FileNotFoundError:
                 print("Error: file not found ")
                 return
