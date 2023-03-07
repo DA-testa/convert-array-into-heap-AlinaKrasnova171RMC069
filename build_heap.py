@@ -51,12 +51,12 @@ def main():
     imp = input() # first two tests are from keyboard, third test is from a file
 
     if "F" in imp:
-        path = './tests/'
+        path = "./tests/"
         file = input()
         file_path = path + file
         if "a" not in file:
             try:
-                with open(file_path) as fl:
+                with open(file_path, "r") as fl:
                     n = int(fl.readline())
                     arr = list(map(int, fl.readline().strip().split()))
             except FileNotFoundError:
