@@ -34,10 +34,12 @@ def main():
     imp = input() # first two tests are from keyboard, third test is from a file
 
     if "F" in imp:
-        #test_file = "04"
-        path = './test/04'
+        path = './tests/'
+        file = input()
+        folder = path + file
+        
         #test_path = path + test_file
-        with open(path, "r") as f:
+        with open(folder, "r") as f:
             n = int(f.readline().strip())
             data = list(map(int, f.readline().strip().split()))
     
