@@ -67,8 +67,6 @@ def main():
             print("Error")
         
         
-    
-
     if "I" in imp:
     # input from keyboard
         n = int(input())
